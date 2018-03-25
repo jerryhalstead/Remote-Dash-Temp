@@ -60,6 +60,15 @@ void loop(void)
   if(HologramCloud.getNetworkTime(dt)) {
     Clock.setDateTime(dt);
   }
+
+  if (Charger.batteryMillivolts()<3000) { 
+    HologramCloud.print("battery low");
+    HologramCloud.attachTag("M");
+    HologramCloud.sendMessage();
+    HologramCloud.clear();
+    HologramCloud.powerDown();
+    Dash.deepSleep();
+  }
   
   HologramCloud.powerDown();
   int hour = Clock.currentTime().substring(0, 2).toInt();
